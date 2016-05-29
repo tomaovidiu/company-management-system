@@ -1,30 +1,37 @@
 package ro.sci.cms;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 public class CompanyManagementSystem {
 
-	private ArrayList<Person> listOfManagers = new ArrayList<>();
-	private ArrayList<Person> listOfJuniorEngineers = new ArrayList<>();
-	private ArrayList<Person> listOfSeniorEngineers = new ArrayList<>();
-	private HashMap<String, ArrayList<Person>> mapOfAllEmployees = new HashMap<>();
-	private int numberOfParkingSpaces = 2;
+	private Collection <Person> listOfManagers = new ArrayList<>();
+	private Collection <Person> listOfJuniorEngineers = new ArrayList<>();
+	private Collection <Person> listOfSeniorEngineers = new ArrayList<>();
+	private HashMap<String,Collection<Person>> mapOfAllEmployees = new HashMap<>();
+	private int numberOfParkingSpaces = 10;
 
-	public CompanyManagementSystem(ArrayList<Person> listOfAllEmploy) {
+	public CompanyManagementSystem(Collection<Person> listOfAllEmploy) {
 		createListsForDifferentEmploiesRoles(listOfAllEmploy);
 		addListsToHashMap();
 	}
 
+	
+	
+	
+	
 	private void addListsToHashMap() {
 		mapOfAllEmployees.put("Manager", listOfManagers);
 		mapOfAllEmployees.put("Senior Software Engineer", listOfSeniorEngineers);
 		mapOfAllEmployees.put("Junior Software Engineer", listOfJuniorEngineers);
 	}
 
-	private void createListsForDifferentEmploiesRoles(ArrayList<Person> listOfAllEmploy) {
+	private void createListsForDifferentEmploiesRoles(Collection<Person> listOfAllEmploy) {
 		for (Person person : listOfAllEmploy) {
 			if (person.getRoleInCompany().equals("Manager")
 					|| (person.getRoleInCompany().equals("Junior Software Engineer"))
@@ -56,7 +63,7 @@ public class CompanyManagementSystem {
 		if (mapOfAllEmployees.isEmpty()) {
 			System.out.println("No employees are in the list!");
 		} else {
-			for (Entry<String, ArrayList<Person>> entry : mapOfAllEmployees.entrySet()) {
+			for (Entry<String, Collection<Person>> entry : mapOfAllEmployees.entrySet()) {
 				// System.out.println(entry.getKey() + "/" +
 				// entry.getValue().toString());
 				ArrayList<Person> temp = new ArrayList<>();
@@ -73,7 +80,7 @@ public class CompanyManagementSystem {
 	public PriorityQueue<Person> generateListOfEmployeesWithParkingSpace() {
 		// prepare the list with all the employees
 		PriorityQueue<Person> listOfEmployeesWithParkingSpace = new PriorityQueue<Person>();
-		for (Entry<String, ArrayList<Person>> entry : mapOfAllEmployees.entrySet()) {
+		for (Entry<String, Collection<Person>> entry : mapOfAllEmployees.entrySet()) {
 			listOfEmployeesWithParkingSpace.addAll(entry.getValue());
 		}
 		System.out.println(listOfEmployeesWithParkingSpace.size());
@@ -98,7 +105,7 @@ public class CompanyManagementSystem {
 		}
 	}
 
-	public ArrayList<Person> getListOfManagers() {
+	public Collection<Person> getListOfManagers() {
 		return listOfManagers;
 	}
 
@@ -106,7 +113,7 @@ public class CompanyManagementSystem {
 		this.listOfManagers = listOfManagers;
 	}
 
-	public ArrayList<Person> getListOfJuniorEngineers() {
+	public Collection<Person> getListOfJuniorEngineers() {
 		return listOfJuniorEngineers;
 	}
 
@@ -114,7 +121,7 @@ public class CompanyManagementSystem {
 		this.listOfJuniorEngineers = listOfJuniorEngineers;
 	}
 
-	public ArrayList<Person> getListOfSeniorEngineers() {
+	public Collection<Person> getListOfSeniorEngineers() {
 		return listOfSeniorEngineers;
 	}
 
@@ -122,11 +129,11 @@ public class CompanyManagementSystem {
 		this.listOfSeniorEngineers = listOfSeniorEngineers;
 	}
 
-	public HashMap<String, ArrayList<Person>> getMapOfAllEmploies() {
+	public AbstractMap<String,Collection<Person>> getMapOfAllEmploies() {
 		return mapOfAllEmployees;
 	}
 
-	public void setMapOfAllEmploies(HashMap<String, ArrayList<Person>> mapOfAllEmploies) {
+	public void setMapOfAllEmploies(HashMap<String, Collection<Person>> mapOfAllEmploies) {
 		this.mapOfAllEmployees = mapOfAllEmploies;
 	}
 

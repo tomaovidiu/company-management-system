@@ -50,8 +50,7 @@ public class Person implements Comparable<Person> {
 		if (this.seniority > o.getSeniority()) {
 			return 1;
 		}
-		return 0;
-
+		return this.name.compareTo(o.name);
 	}
 
 }
