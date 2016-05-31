@@ -1,5 +1,7 @@
 package ro.sci.cms;
 
+import ro.sci.cms.CompanyManagementSystem.role;
+
 /**
  * This class implements Employ. An Employ has 3 elements: *<b>The application
  * is able to</b>
@@ -16,13 +18,15 @@ public class Employee implements Comparable<Employee> {
 
 	private String name;
 	private int seniority;
-	private String roleInCompany;
-
-	public Employee(String name, int seniority, String roleInCompany) {
+	private role roleInCompany;
+	private boolean hasParkingSpaces;
+	
+	public Employee(String name, int seniority, role manager, boolean hasParkingSpaces) {
 
 		this.name = name;
 		this.seniority = seniority;
-		this.roleInCompany = roleInCompany;
+		this.roleInCompany = manager;
+	this.setHasParkingSpaces(hasParkingSpaces);	
 	}
 
 	@Override
@@ -46,11 +50,11 @@ public class Employee implements Comparable<Employee> {
 		this.seniority = seniority;
 	}
 
-	public String getRoleInCompany() {
+	public role getRoleInCompany() {
 		return roleInCompany;
 	}
 
-	public void setRoleInCompany(String roleInCompany) {
+	public void setRoleInCompany(role roleInCompany) {
 		this.roleInCompany = roleInCompany;
 	}
 
@@ -97,6 +101,14 @@ public class Employee implements Comparable<Employee> {
 		if (seniority != other.seniority)
 			return false;
 		return true;
+	}
+
+	public boolean isHasParkingSpaces() {
+		return hasParkingSpaces;
+	}
+
+	public void setHasParkingSpaces(boolean hasParkingSpaces) {
+		this.hasParkingSpaces = hasParkingSpaces;
 	}
 
 }

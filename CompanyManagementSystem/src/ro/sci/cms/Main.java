@@ -1,6 +1,5 @@
 package ro.sci.cms;
-
-import java.util.Collection;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -15,28 +14,28 @@ public class Main {
 
 	public static void main(String[] args) throws RoleNotDefined {
 
-		Collection<Employee> listOfAllEmploy = new TreeSet<>();
-		Collection<Employee> employWithParkingSpace = new TreeSet<>();
-		Employee employ = new Employee("Andrei Toma", 5, "Manager");
+		/*Set<Employee> listOfAllEmploy = new TreeSet<>();
+		Set<Employee> employWithParkingSpace = new TreeSet<>();
+		Employee employ = new Employee("Andrei Toma", 5, "Manager", true);
 		listOfAllEmploy.add(employ);
-		employ = new Employee("Gigi", 10, "Junior Software Engineer");
+		employ = new Employee("Gigi", 10, "Junior Software Engineer", false);
 		listOfAllEmploy.add(employ);
-		employ = new Employee("Alin", 9, "Senior Software Engineer");
+		employ = new Employee("Alin", 9, "Senior Software Engineer", true);
 		listOfAllEmploy.add(employ);
-		employ = new Employee("Doru", 9, "Senior Software Engineer");
+		employ = new Employee("Doru", 9, "Senior Software Engineer", false);
 		listOfAllEmploy.add(employ);
-		employ = new Employee("Nana", 5, "Junior Software  Engineer");
+		employ = new Employee("Nana", 5, "Junior Software Engineer", false);
 		listOfAllEmploy.add(employ);
-		employ = new Employee("Vivi", 4, "Junior Software Engineer");
+		employ = new Employee("Vivi", 4, "Junior Software Engineer", true);
 		listOfAllEmploy.add(employ);
-		System.out.println("size after add = " + listOfAllEmploy.size());
-
+		System.out.println("Employees added! Number of employees = " + listOfAllEmploy.size());
+//initiListOfEmploy
 		CompanyManagementInterface companyManagementSystem = new CompanyManagementSystem(listOfAllEmploy);
-
+		//sa aiba addemploy (employ e)
 		companyManagementSystem.printOfAllEmployees();
 		employWithParkingSpace = companyManagementSystem.generateListOfEmployeesWithParkingSpace();
 		companyManagementSystem.printOfEmploiesWithParkingSpace(employWithParkingSpace);
-
+*/
 	}
 
-};
+}
