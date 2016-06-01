@@ -1,21 +1,20 @@
 package ro.sci.cms;
 
-import java.util.Collection;
+
 import java.util.Set;
 
 public interface CompanyManagementInterface {
-
-	/**
-	 * Print all the employees.
-	 */
-	void printOfAllEmployees();
+	enum role {
+		MANAGER, JUNIOR_ENGINEERS, SENIOR_ENGINEERS
+	};
+	
 
 	/**
 	 * This method generates the lis1t of employees with parking space.
 	 * 
 	 * @return list of these employees
 	 */
-	Set<Employee> generateListOfEmployeesWithParkingSpace();
+	Set<Employee> generateListOfEmployeesWithoutParkingSpace();
 
 	/**
 	 * This method print the list of employees with parking space.
@@ -23,6 +22,5 @@ public interface CompanyManagementInterface {
 	 * @param list
 	 *            of employees with parking space - to be print
 	 */
-	void printOfEmploiesWithParkingSpace(Collection<Employee> employWithParkingSpace);
 
 	}

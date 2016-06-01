@@ -3,10 +3,11 @@ package ro.sci.cms;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+
+
 
 /**
  * Class Company Management System receives as an input a list of employees.
@@ -38,40 +39,10 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	private Collection<Employee> listOfJuniorEngineers = new ArrayList<>();
 	private Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
 	private HashMap<role, Collection<Employee>> mapOfAllEmployees = new HashMap<>();
-
-	enum role {
-		MANAGER, JUNIOR_ENGINEERS, SENIOR_ENGINEERS
-	};
-
+	
 	public CompanyManagementSystem(Collection<Employee> listOfAllEmploy) throws RoleNotDefined {
 		createListsForDifferentEmploiesRoles(listOfAllEmploy);
 		addListsToHashMap();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ro.sci.cms.CompanyManagementInterface#printOfAllEmployees()
-	 */
-	@Override
-	public void printOfAllEmployees() {
-		int nrOfEmployees = 0;
-		System.out.println("\nList of all emploies - from HashMap:");
-		if (mapOfAllEmployees.isEmpty()) {
-			System.out.println("No employees are in the list!");
-		} else {
-			for (Entry<role, Collection<Employee>> entry : mapOfAllEmployees.entrySet()) {
-				// System.out.println(entry.getKey() + "/" +
-				// entry.getValue().toString());
-				ArrayList<Employee> temp = new ArrayList<>();
-				temp.addAll(entry.getValue());
-				for (Employee person : temp) {
-					System.out.println(person.toString());
-					nrOfEmployees++;
-				}
-			}
-			System.out.println("Number of employees = " + nrOfEmployees);
-		}
 	}
 
 	/*
@@ -81,50 +52,27 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	 * generateListOfEmployeesWithParkingSpace()
 	 */
 	@Override
-	public Set<Employee> generateListOfEmployeesWithParkingSpace() {
-		// prepare the list with all the employees
+	public Set<Employee> generateListOfEmployeesWithoutParkingSpace() {
 		Collection<Employee> listOfAllEmployees = new TreeSet<Employee>();
-		Set<Employee> listOfEmployeesWithParkingSpace = new TreeSet<Employee>();
+		Set<Employee> listOfEmployeesWithoutParkingSpace = new TreeSet<Employee>();
 
+		// prepare the list with all the employees
 		for (Entry<role, Collection<Employee>> entry : mapOfAllEmployees.entrySet()) {
 			listOfAllEmployees.addAll(entry.getValue());
 		}
-		// add employ till the number of employees = number of parking spaces
-		// create ascending iterator
-		Iterator<Employee> iterator;
-		iterator = ((TreeSet<Employee>) listOfAllEmployees).descendingIterator();
-		;
-
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next() + " ");
+		// generate the list of employees with parking spaces
+		for (Employee employee : listOfAllEmployees) {
+			if (employee.isHasParkingSpaces()) {
+				listOfEmployeesWithoutParkingSpace.add(employee);
+			}
 		}
-
-		/*
-		 * for (Employee employ : listOfAllEmployees) {
-		 * listOfEmployeesWithParkingSpace.add(employ); if (++nrOfEmployAdded >
-		 * numberOfParkingSpaces - 1) break; }
-		 */
-		return listOfEmployeesWithParkingSpace;
+		System.out.println("----------");
+		for (Employee employee : listOfEmployeesWithoutParkingSpace) {
+			System.out.println(employee.toString());
+		}
+		return listOfEmployeesWithoutParkingSpace;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ro.sci.cms.CompanyManagementInterface#printOfEmploiesWithParkingSpace(
-	 * java.util.PriorityQueue)
-	 */
-	@Override
-	public void printOfEmploiesWithParkingSpace(Collection<Employee> listOfEmployiesWithParkingSpace) {
-		System.out.println("\nList of emploies with parking spaces:");
-		/*
-		 * if (numberOfParkingSpaces == 0) { System.out.println(
-		 * "Number of parking spaces = 0 ! No employ has parking spaces!"); }
-		 * else { for (Employee employ : listOfEmployiesWithParkingSpace) {
-		 * System.out.println(employ); } // System.out.println(
-		 * "Number of parking spaces = " + numberOfParkingSpaces); } &\
-		 */
-	}
 
 	private void addListsToHashMap() {
 		mapOfAllEmployees.put(role.MANAGER, listOfManagers);

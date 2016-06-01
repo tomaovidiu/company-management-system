@@ -3,11 +3,10 @@ package ro.sci.cms;
 import org.junit.Before;
 import org.junit.Test;
 
-import ro.sci.cms.CompanyManagementSystem.role;
+import ro.sci.cms.Employee.role;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.assertFalse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,14 +14,14 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * This will tests CompanyManagementClass.
+ * This will tests CompanyManagementSystem class.
  * 
- * @author Toma
+ * @author Ovidiu
  *
  */
 public class CompanyManagementSystemTest {
 
-	List<role> listOfAllEmployess = new ArrayList<>();
+	List<Employee> listOfAllEmployess = new ArrayList<>();
 
 	@Before
 	public void initListOfEmploy() {
@@ -36,7 +35,7 @@ public class CompanyManagementSystemTest {
 		listOfAllEmployess.add(employ);
 		employ = new Employee("Nana", 5, role.SENIOR_ENGINEERS, false);
 		listOfAllEmployess.add(employ);
-		employ = new Employee("Vivi", 4, role.JUNIOR_ENGINEERS, true);
+		employ = new Employee("Vivi", 6, role.JUNIOR_ENGINEERS, true);
 		listOfAllEmployess.add(employ);
 		assertEquals("List generated ok", 6, listOfAllEmployess.size());
 	}
@@ -48,6 +47,36 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
+	public void listOfEmployeesWithoutParkingSpacesHasCorectSize() throws RoleNotDefined {
+		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem(listOfAllEmployess);
+		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
+		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
+		assertEquals("List of employess without parking has corect size", 3,
+				listOfEmployeesWithoutParkingSpaces.size());
+
+	}
+
+	@Test
+	public void listOfEmployeesWithoutParkingSpacesIsSorted() throws RoleNotDefined {
+		// given
+		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem(listOfAllEmployess);
+		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
+		// when
+		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
+
+		int lastEmploySeniority = -1;
+		boolean listIsNotSorted = false;
+		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
+			if (employee.getSeniority() > lastEmploySeniority) {
+				listIsNotSorted = true;
+				break;
+			}
+		}
+		// then
+		assertFalse(listIsNotSorted);
+	}
+
+	@Test
 	public void listOfManagersIsCorectGenerated() throws RoleNotDefined {
 		{
 			// given
@@ -56,7 +85,7 @@ public class CompanyManagementSystemTest {
 			CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem(listOfAllEmployess);
 			listOfManagers = companyManagementSystem.getListOfManagers();
 			// then
-			assertEquals("managers list size = ok", 1, listOfManagers.size());
+			assertEquals("Managers list size = ok", 1, listOfManagers.size());
 		}
 	}
 
@@ -69,7 +98,7 @@ public class CompanyManagementSystemTest {
 			CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem(listOfAllEmployess);
 			listOfJuniorEngineers = companyManagementSystem.getListOfJuniorEngineers();
 			// then
-			assertEquals("junior engineers list size = ok", 3, listOfJuniorEngineers.size());
+			assertEquals("Junior engineers list size = ok", 2, listOfJuniorEngineers.size());
 		}
 	}
 
@@ -82,34 +111,8 @@ public class CompanyManagementSystemTest {
 			CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem(listOfAllEmployess);
 			listOfSeniorEngineers = companyManagementSystem.getListOfSeniorEngineers();
 			// then
-			assertEquals("senior engineers list size = ok", 2, listOfSeniorEngineers.size());
-
+			assertEquals("Senior engineers list size = ok", 3, listOfSeniorEngineers.size());
 		}
 	}
 
-		@Test
-	public void listSizeOfEmployeesWithParkingSpaceIsLessOrEqualThenNumberOfParkingSpaces() throws RoleNotDefined {
-		// list size can be less then number of parking spaces!
-		// given
-		Collection<Employee> listOfAllEmployees = new TreeSet<>();
-		Employee employ = new Employee("Andrei Toma", 5, "Manager", true);
-		listOfAllEmployees.add(employ);
-		employ = new Employee("Gigi", 10, "Junior Software Engineer", false);
-		listOfAllEmployees.add(employ);
-		employ = new Employee("Alin", 10, "Senior Software Engineer", true);
-		listOfAllEmployees.add(employ);
-		employ = new Employee("Andrei", 9, "Senior Software Engineer", false);
-		listOfAllEmployees.add(employ);
-		employ = new Employee("Nana", 5, "Junior Software Engineer", true);
-		listOfAllEmployees.add(employ);
-		employ = new Employee("Vivi", 4, "Junior Software Engineer", true);
-		// when
-		listOfAllEmployees.add(employ);
-		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem(listOfAllEmployees);
-		// then
-		
-	}
-
-	// listOfEmployeesWithParkingSpaceIsCorectGenerated
-	// equals true = num
 }
