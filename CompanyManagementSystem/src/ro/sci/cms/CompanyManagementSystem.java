@@ -3,6 +3,7 @@ package ro.sci.cms;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
@@ -40,8 +41,9 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	private Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
 	private HashMap<role, Collection<Employee>> mapOfAllEmployees = new HashMap<>();
 	
-	public CompanyManagementSystem(Collection<Employee> listOfAllEmploy) throws RoleNotDefined {
-		createListsForDifferentEmploiesRoles(listOfAllEmploy);
+	public void addListOfEmployess(List<Employee> listOfAllEmployees) throws RoleNotDefined
+	{
+		createListsForDifferentEmploiesRoles(listOfAllEmployees);
 		addListsToHashMap();
 	}
 
@@ -66,10 +68,6 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 				listOfEmployeesWithoutParkingSpace.add(employee);
 			}
 		}
-		System.out.println("----------");
-		for (Employee employee : listOfEmployeesWithoutParkingSpace) {
-			System.out.println(employee.toString());
-		}
 		return listOfEmployeesWithoutParkingSpace;
 	}
 
@@ -82,6 +80,8 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 
 	private void createListsForDifferentEmploiesRoles(Collection<Employee> listOfAllEmploy) throws RoleNotDefined {
 		for (Employee employ : listOfAllEmploy) {
+			
+			// test role and age
 			switch (employ.getRoleInCompany()) {
 			case MANAGER: {
 				listOfManagers.add(employ);

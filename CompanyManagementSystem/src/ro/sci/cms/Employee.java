@@ -42,10 +42,6 @@ public class Employee implements Comparable<Employee> {
 		return this.name.compareTo(o.name);
 	}
 
-	@Override
-	public String toString() {
-		return "Person [name=" + name + ", seniority=" + seniority + ", roleInCompany=" + roleInCompany + "]";
-	}
 
 	public String getName() {
 		return name;
@@ -111,6 +107,12 @@ public class Employee implements Comparable<Employee> {
 
 	public void setHasParkingSpaces(boolean hasParkingSpaces) {
 		this.hasParkingSpaces = hasParkingSpaces;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", seniority=" + seniority + ", hasParkingSpaces=" + hasParkingSpaces
+				+ ", roleInCompany=" + roleInCompany + "]";
 	}
 
 }
