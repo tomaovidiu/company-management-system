@@ -8,8 +8,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-
-
 /**
  * Class Company Management System receives as an input a list of employees.
  * The Company Management System allow a way to obtain a list of employees who
@@ -40,9 +38,9 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	private Collection<Employee> listOfJuniorEngineers = new ArrayList<>();
 	private Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
 	private HashMap<role, Collection<Employee>> mapOfAllEmployees = new HashMap<>();
-	
-	public void addListOfEmployess(List<Employee> listOfAllEmployees) throws RoleNotDefined
-	{
+
+	public void addListOfEmployess(List<Employee> listOfAllEmployees)
+			throws RoleNotDefinedException, WrongSeniorityException {
 		createListsForDifferentEmploiesRoles(listOfAllEmployees);
 		addListsToHashMap();
 	}
@@ -71,17 +69,24 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 		return listOfEmployeesWithoutParkingSpace;
 	}
 
-
 	private void addListsToHashMap() {
 		mapOfAllEmployees.put(role.MANAGER, listOfManagers);
 		mapOfAllEmployees.put(role.SENIOR_ENGINEERS, listOfSeniorEngineers);
 		mapOfAllEmployees.put(role.JUNIOR_ENGINEERS, listOfJuniorEngineers);
 	}
 
-	private void createListsForDifferentEmploiesRoles(Collection<Employee> listOfAllEmploy) throws RoleNotDefined {
+	private void createListsForDifferentEmploiesRoles(Collection<Employee> listOfAllEmploy)
+			throws RoleNotDefinedException, WrongSeniorityException {
 		for (Employee employ : listOfAllEmploy) {
-			
+
+			if (employ.getSeniority() < 0) {
+				throw new WrongSeniorityException("Exception: Seniority < 0 is not good! Employ " + employ.getName());
+			}
+			// if (!Enum.getIfPresent(MyData.class, "THREE").isPresent()) {
+			// System.out.println("THREE is not here");
+
 			// test role and age
+
 			switch (employ.getRoleInCompany()) {
 			case MANAGER: {
 				listOfManagers.add(employ);
@@ -96,8 +101,8 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 				break;
 			}
 			default: {
-				throw new RoleNotDefined(
-						"Error - Role in company " + employ.getRoleInCompany() + " not exist" + "\n Employ not added!");
+				throw new RoleNotDefinedException(
+						"Error - Role in company " + employ.getRoleInCompany() + " not exist");
 			}
 			}
 		}

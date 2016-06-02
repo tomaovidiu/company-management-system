@@ -1,9 +1,12 @@
 package ro.sci.cms;
 
-public class RoleNotDefined extends Exception {
+public class RoleNotDefinedException extends Exception {
 
-	public RoleNotDefined(String string) {
-		System.out.println(string);
+	private static final long serialVersionUID = 799596449794372866L;
+
+	public RoleNotDefinedException(String string) {
+		super(string);
+		System.err.println(string);
 	}
 
 }

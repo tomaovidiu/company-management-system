@@ -18,11 +18,11 @@ public class Employee implements Comparable<Employee> {
 	private int seniority;
 	private boolean hasParkingSpaces;
 	private role roleInCompany;
+
 	enum role {
 		MANAGER, JUNIOR_ENGINEERS, SENIOR_ENGINEERS
 	};
-	
-	
+
 	public Employee(String name, int seniority, role roleInCompany, boolean hasParkingSpaces) {
 
 		this.name = name;
@@ -41,7 +41,6 @@ public class Employee implements Comparable<Employee> {
 		}
 		return this.name.compareTo(o.name);
 	}
-
 
 	public String getName() {
 		return name;

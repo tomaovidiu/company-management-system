@@ -41,14 +41,16 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void hashMapIsCreatedOk() throws RoleNotDefined {
+	public void hashMapIsCreatedOk() throws RoleNotDefinedException, WrongSeniorityException {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		companyManagementSystem.addListOfEmployess(listOfAllEmployess);
 		assertEquals("HashMap generated ok", 3, companyManagementSystem.getMapOfAllEmploies().size());
 	}
 
-	@Test //also print the list of all employees and the list of employees with parking spaces
-	public void listOfEmployeesWithoutParkingSpacesHasCorectSize() throws RoleNotDefined {
+	@Test // also print the list of all employees and the list of employees with
+			// parking spaces
+	public void listOfEmployeesWithoutParkingSpacesHasCorectSize()
+			throws RoleNotDefinedException, WrongSeniorityException {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		companyManagementSystem.addListOfEmployess(listOfAllEmployess);
 		System.out.println("---List of ALL employees:");
@@ -57,7 +59,7 @@ public class CompanyManagementSystemTest {
 		}
 		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
 		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
-		System.out.println("\n---Sorted list of employees whitout parking spaces:");
+		System.out.println("\n---Sorted list of employees without parking spaces:");
 		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
 			System.out.println(employee.toString());
 		}
@@ -66,7 +68,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfEmployeesWithoutParkingSpacesIsSorted() throws RoleNotDefined {
+	public void listOfEmployeesWithoutParkingSpacesIsSorted() throws RoleNotDefinedException {
 		// given
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
@@ -75,7 +77,8 @@ public class CompanyManagementSystemTest {
 		int lastEmploySeniority = -1;
 		boolean listIsNotSorted = false;
 		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
-			//System.out.println(employee.getSeniority() + " " +lastEmploySeniority);
+			// System.out.println(employee.getSeniority() + " "
+			// +lastEmploySeniority);
 			if (employee.getSeniority() < lastEmploySeniority) {
 				listIsNotSorted = true;
 				break;
@@ -86,7 +89,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfManagersIsCorectGenerated() throws RoleNotDefined {
+	public void listOfManagersIsCorectGenerated() throws RoleNotDefinedException, WrongSeniorityException {
 		{
 			// given
 			Collection<Employee> listOfManagers = new ArrayList<>();
@@ -100,7 +103,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfJuniorEngineersIsCorectGenerated() throws RoleNotDefined {
+	public void listOfJuniorEngineersIsCorectGenerated() throws RoleNotDefinedException, WrongSeniorityException {
 		{
 			// given
 			Collection<Employee> listOfJuniorEngineers = new ArrayList<>();
@@ -114,7 +117,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfSeniorEngineersIsCorectGenerated() throws RoleNotDefined {
+	public void listOfSeniorEngineersIsCorectGenerated() throws RoleNotDefinedException, WrongSeniorityException {
 		{
 			// given
 			Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
