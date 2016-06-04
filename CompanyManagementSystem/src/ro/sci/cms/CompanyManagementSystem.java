@@ -38,7 +38,13 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	 * ro.sci.cms.CompanyManagementInterface#addListOfEmployees(java.util.List)
 	 */
 	@Override
-	public void addListOfEmployees(List<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException {
+	public void addListOfEmployees(List<Employee> listOfAllEmployees)
+			throws WrongSeniorityException, RoleNotDefinedException {
+
+		if (listOfAllEmployees == null) {
+			throw new IllegalArgumentException("Exception: List of all employees in empthy!");
+		}
+
 		createListsForDifferentEmployeesRoles(listOfAllEmployees);
 		addListsToHashMap();
 	}
@@ -73,12 +79,14 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 		mapOfAllEmployees.put(role.JUNIOR_ENGINEERS, listOfJuniorEngineers);
 	}
 
-	private void createListsForDifferentEmployeesRoles(Collection<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException {
-		
+	private void createListsForDifferentEmployeesRoles(Collection<Employee> listOfAllEmployees)
+			throws WrongSeniorityException, RoleNotDefinedException {
+
 		try {
 			for (Employee employ : listOfAllEmployees) {
 				if (employ.getSeniority() < 0) {
-					throw new WrongSeniorityException("Exception: Seniority < 0 is not ok! At employ " + employ.getName());
+					throw new WrongSeniorityException(
+							"Exception: Seniority < 0 is not ok! At employ " + employ.getName());
 				}
 
 				switch (employ.getRoleInCompany()) {
