@@ -38,7 +38,7 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	 * ro.sci.cms.CompanyManagementInterface#addListOfEmployees(java.util.List)
 	 */
 	@Override
-	public void addListOfEmployees(List<Employee> listOfAllEmployees) {
+	public void addListOfEmployees(List<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException {
 		createListsForDifferentEmployeesRoles(listOfAllEmployees);
 		addListsToHashMap();
 	}
@@ -73,30 +73,36 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 		mapOfAllEmployees.put(role.JUNIOR_ENGINEERS, listOfJuniorEngineers);
 	}
 
-	private void createListsForDifferentEmployeesRoles(Collection<Employee> listOfAllEmploy) {
-		for (Employee employ : listOfAllEmploy) {
-			if (employ.getSeniority() < 0) {
-				throw new IllegalArgumentException("Exception: Seniority < 0 is not ok! At employ " + employ.getName());
-			}
+	private void createListsForDifferentEmployeesRoles(Collection<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException {
+		
+		try {
+			for (Employee employ : listOfAllEmployees) {
+				if (employ.getSeniority() < 0) {
+					throw new WrongSeniorityException("Exception: Seniority < 0 is not ok! At employ " + employ.getName());
+				}
 
-			switch (employ.getRoleInCompany()) {
-			case MANAGER: {
-				listOfManagers.add(employ);
-				break;
+				switch (employ.getRoleInCompany()) {
+				case MANAGER: {
+					listOfManagers.add(employ);
+					break;
+				}
+				case JUNIOR_ENGINEERS: {
+					listOfJuniorEngineers.add(employ);
+					break;
+				}
+				case SENIOR_ENGINEERS: {
+					listOfSeniorEngineers.add(employ);
+					break;
+				}
+				default: {
+					throw new RoleNotDefinedException("Error - Role in company " + employ.getRoleInCompany()
+							+ " not defined! At employ " + employ.getName());
+				}
+				}
 			}
-			case JUNIOR_ENGINEERS: {
-				listOfJuniorEngineers.add(employ);
-				break;
-			}
-			case SENIOR_ENGINEERS: {
-				listOfSeniorEngineers.add(employ);
-				break;
-			}
-			default: {
-				throw new IllegalArgumentException("Error - Role in company " + employ.getRoleInCompany()
-						+ " not defined! At employ " + employ.getName());
-			}
-			}
+		} catch (IllegalArgumentException e) {
+			System.err.println("Exception: List of employees is not valid!");
+			e.printStackTrace();
 		}
 
 	}

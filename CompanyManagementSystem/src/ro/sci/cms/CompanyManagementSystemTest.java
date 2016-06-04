@@ -42,14 +42,14 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void hashMapIsCreatedOk() {
+	public void hashMapIsCreatedOk() throws WrongSeniorityException, RoleNotDefinedException {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 		assertEquals("HashMap generated ok", 3, companyManagementSystem.getMapOfAllEmploies().size());
 	}
 
 	@After
-	public void listOfEmployeesWithoutParkingSpacesHasCorectSize() {
+	public void listOfEmployeesWithoutParkingSpacesHasCorectSize() throws WrongSeniorityException, RoleNotDefinedException {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
@@ -102,7 +102,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfManagersIsCorectGenerated() {
+	public void listOfManagersIsCorectGenerated() throws WrongSeniorityException, RoleNotDefinedException {
 		{
 			// given
 			Collection<Employee> listOfManagers = new ArrayList<>();
@@ -116,7 +116,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfJuniorEngineersIsCorectGenerated() {
+	public void listOfJuniorEngineersIsCorectGenerated() throws WrongSeniorityException, RoleNotDefinedException {
 		{
 			// given
 			Collection<Employee> listOfJuniorEngineers = new ArrayList<>();
@@ -130,7 +130,7 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfSeniorEngineersIsCorectGenerated() {
+	public void listOfSeniorEngineersIsCorectGenerated() throws WrongSeniorityException, RoleNotDefinedException {
 		{
 			// given
 			Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
