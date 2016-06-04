@@ -26,7 +26,7 @@ public class CompanyManagementSystemTest {
 
 	@Before
 	public void initListOfEmploy() {
-		Employee employ = new Employee("Andrei", 5, role.MANAGER, true);
+		Employee employ = new Employee("Andrei", -5, role.MANAGER, true);
 		listOfAllEmployess.add(employ);
 		employ = new Employee("Gigi", 10, role.JUNIOR_ENGINEERS, false);
 		listOfAllEmployess.add(employ);

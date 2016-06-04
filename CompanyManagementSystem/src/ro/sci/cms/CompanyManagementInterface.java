@@ -24,6 +24,6 @@ public interface CompanyManagementInterface {
 	 * @throws RoleNotDefinedException
 	 * @throws WrongSeniorityException
 	 */
-	void addListOfEmployees(List<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException;
+	void addListOfEmployees(List<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException, IllegalArgumentException;
 
 }

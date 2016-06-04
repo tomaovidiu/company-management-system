@@ -38,8 +38,8 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	 * ro.sci.cms.CompanyManagementInterface#addListOfEmployees(java.util.List)
 	 */
 	@Override
-	public void addListOfEmployees(List<Employee> listOfAllEmployees)
-			throws WrongSeniorityException, RoleNotDefinedException {
+	public void addListOfEmployees(List<Employee> listOfAllEmployees) 
+			throws WrongSeniorityException, RoleNotDefinedException, IllegalArgumentException {
 
 		if (listOfAllEmployees == null) {
 			throw new IllegalArgumentException("Exception: List of all employees in empthy!");
@@ -80,7 +80,7 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	}
 
 	private void createListsForDifferentEmployeesRoles(Collection<Employee> listOfAllEmployees)
-			throws WrongSeniorityException, RoleNotDefinedException {
+			throws WrongSeniorityException, RoleNotDefinedException, IllegalArgumentException {
 
 		try {
 			for (Employee employ : listOfAllEmployees) {
