@@ -15,8 +15,6 @@ public interface CompanyManagementInterface {
 	 */
 	Set<Employee> generateListOfEmployeesWithoutParkingSpace();
 
-	
-	
 	/**
 	 * This method add a list of employees to the company management system.
 	 * 
@@ -24,6 +22,7 @@ public interface CompanyManagementInterface {
 	 * @throws RoleNotDefinedException
 	 * @throws WrongSeniorityException
 	 */
-	void addListOfEmployees(List<Employee> listOfAllEmployees) throws WrongSeniorityException, RoleNotDefinedException, IllegalArgumentException;
+	void addListOfEmployees(List<Employee> listOfAllEmployees)
+			throws WrongSeniorityException, RoleNotDefinedException, IllegalArgumentException;
 
 }

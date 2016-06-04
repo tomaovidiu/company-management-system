@@ -26,7 +26,7 @@ public class CompanyManagementSystemTest {
 
 	@Before
 	public void initListOfEmploy() {
-		Employee employ = new Employee("Andrei", -5, role.MANAGER, true);
+		Employee employ = new Employee("Andrei", 5, role.MANAGER, true);
 		listOfAllEmployess.add(employ);
 		employ = new Employee("Gigi", 10, role.JUNIOR_ENGINEERS, false);
 		listOfAllEmployess.add(employ);
@@ -49,7 +49,8 @@ public class CompanyManagementSystemTest {
 	}
 
 	@After
-	public void listOfEmployeesWithoutParkingSpacesHasCorectSize() throws WrongSeniorityException, RoleNotDefinedException {
+	public void listOfEmployeesWithoutParkingSpacesHasCorectSize()
+			throws WrongSeniorityException, RoleNotDefinedException {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
@@ -60,24 +61,24 @@ public class CompanyManagementSystemTest {
 				listOfEmployeesWithoutParkingSpaces.size());
 	}
 
-	/*@Test
-	public void printAllEmployeesAndEmployeesWithParkingSpaces() {
-		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
-		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
-		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
-
-		System.out.println("---List of ALL employees:");
-		for (Employee employee : listOfAllEmployess) {
-			System.out.println(employee.toString());
-		}
-
-		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
-
-		System.out.println("\n---Sorted list of employees without parking spaces:");
-		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
-			System.out.println(employee.toString());
-		}
-	} */
+	/*
+	 * @Test public void printAllEmployeesAndEmployeesWithParkingSpaces() {
+	 * CompanyManagementSystem companyManagementSystem = new
+	 * CompanyManagementSystem(); Set<Employee>
+	 * listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
+	 * companyManagementSystem.addListOfEmployees(listOfAllEmployess);
+	 * 
+	 * System.out.println("---List of ALL employees:"); for (Employee employee :
+	 * listOfAllEmployess) { System.out.println(employee.toString()); }
+	 * 
+	 * listOfEmployeesWithoutParkingSpaces =
+	 * companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
+	 * 
+	 * System.out.println(
+	 * "\n---Sorted list of employees without parking spaces:"); for (Employee
+	 * employee : listOfEmployeesWithoutParkingSpaces) {
+	 * System.out.println(employee.toString()); } }
+	 */
 
 	@Test
 	public void listOfEmployeesWithoutParkingSpacesIsSorted() {

@@ -38,7 +38,7 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	 * ro.sci.cms.CompanyManagementInterface#addListOfEmployees(java.util.List)
 	 */
 	@Override
-	public void addListOfEmployees(List<Employee> listOfAllEmployees) 
+	public void addListOfEmployees(List<Employee> listOfAllEmployees)
 			throws WrongSeniorityException, RoleNotDefinedException, IllegalArgumentException {
 
 		if (listOfAllEmployees == null) {
