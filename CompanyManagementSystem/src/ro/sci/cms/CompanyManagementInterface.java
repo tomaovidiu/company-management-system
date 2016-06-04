@@ -9,17 +9,17 @@ public interface CompanyManagementInterface {
 	};
 
 	/**
-	 * This method generates the lis1t of employees with parking space.
+	 * This method generates the list of employees with parking space.
 	 * 
 	 * @return list of these employees
 	 */
 	Set<Employee> generateListOfEmployeesWithoutParkingSpace();
 
 	/**
-	 * This method add list of employees to the company management system
+	 * This method add a list of employees to the company management system.
 	 * 
-	 * @return void
+	 * @param listOfAllEmployees
 	 */
-	void addListOfEmployess(List<Employee> listOfAllEmployees) throws RoleNotDefinedException, WrongSeniorityException;
+	void addListOfEmployees(List<Employee> listOfAllEmployees);
 
 }

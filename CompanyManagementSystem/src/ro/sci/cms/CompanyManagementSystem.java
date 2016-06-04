@@ -9,29 +9,21 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Class Company Management System receives as an input a list of employees.
- * The Company Management System allow a way to obtain a list of employees who
- * don't have any parking spaces. This list should be ordered based on the
- * employee's seniority in the company. Employee's seniority is defined by the
- * years spent in the company - Not the role. This class keeps internally the
- * employees in role-specific lists. All managers will be in a managers
- * collection, all junior software engineers will be in the junior software
- * engineers collection.
- * 
+ * Class Company Management System receives as an input a list of employees. The
+ * Company Management System allow a way to obtain a list of employees who don't
+ * have any parking spaces. This list should be ordered based on the employee's
+ * seniority in the company. Employee's seniority is defined by the years spent
+ * in the company - Not the role. This class keeps internally the employees in
+ * role-specific lists. All managers will be in a managers collection, all
+ * junior software engineers will be in the junior software engineers
+ * collection.
+ *
  * This class implements CompanyManagementInterface.
  * 
  * @author Ovidiu
  *
  */
 
-/**
- * The constructor generates from Collection of Employ a HashMap which contains
- * all the employ's data. Inside the HashMap are three collection - role
- * specific.
- * 
- * @author Ovidiu
- *
- */
 public class CompanyManagementSystem implements CompanyManagementInterface {
 
 	private Collection<Employee> listOfManagers = new ArrayList<>();
@@ -39,9 +31,15 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	private Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
 	private HashMap<role, Collection<Employee>> mapOfAllEmployees = new HashMap<>();
 
-	public void addListOfEmployess(List<Employee> listOfAllEmployees)
-			throws RoleNotDefinedException, WrongSeniorityException {
-		createListsForDifferentEmploiesRoles(listOfAllEmployees);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ro.sci.cms.CompanyManagementInterface#addListOfEmployees(java.util.List)
+	 */
+	@Override
+	public void addListOfEmployees(List<Employee> listOfAllEmployees) {
+		createListsForDifferentEmployeesRoles(listOfAllEmployees);
 		addListsToHashMap();
 	}
 
@@ -49,7 +47,7 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	 * (non-Javadoc)
 	 * 
 	 * @see ro.sci.cms.CompanyManagementInterface#
-	 * generateListOfEmployeesWithParkingSpace()
+	 * generateListOfEmployeesWithoutParkingSpace()
 	 */
 	@Override
 	public Set<Employee> generateListOfEmployeesWithoutParkingSpace() {
@@ -75,17 +73,11 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 		mapOfAllEmployees.put(role.JUNIOR_ENGINEERS, listOfJuniorEngineers);
 	}
 
-	private void createListsForDifferentEmploiesRoles(Collection<Employee> listOfAllEmploy)
-			throws RoleNotDefinedException, WrongSeniorityException {
+	private void createListsForDifferentEmployeesRoles(Collection<Employee> listOfAllEmploy) {
 		for (Employee employ : listOfAllEmploy) {
-
 			if (employ.getSeniority() < 0) {
-				throw new WrongSeniorityException("Exception: Seniority < 0 is not good! Employ " + employ.getName());
+				throw new IllegalArgumentException("Exception: Seniority < 0 is not ok! At employ " + employ.getName());
 			}
-			// if (!Enum.getIfPresent(MyData.class, "THREE").isPresent()) {
-			// System.out.println("THREE is not here");
-
-			// test role and age
 
 			switch (employ.getRoleInCompany()) {
 			case MANAGER: {
@@ -101,11 +93,12 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 				break;
 			}
 			default: {
-				throw new RoleNotDefinedException(
-						"Error - Role in company " + employ.getRoleInCompany() + " not exist");
+				throw new IllegalArgumentException("Error - Role in company " + employ.getRoleInCompany()
+						+ " not defined! At employ " + employ.getName());
 			}
 			}
 		}
+
 	}
 
 	public Collection<Employee> getListOfManagers() {
@@ -123,5 +116,4 @@ public class CompanyManagementSystem implements CompanyManagementInterface {
 	public HashMap<role, Collection<Employee>> getMapOfAllEmploies() {
 		return mapOfAllEmployees;
 	}
-
 }

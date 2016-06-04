@@ -1,5 +1,6 @@
 package ro.sci.cms;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,41 +42,53 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void hashMapIsCreatedOk() throws RoleNotDefinedException, WrongSeniorityException {
+	public void hashMapIsCreatedOk() {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
-		companyManagementSystem.addListOfEmployess(listOfAllEmployess);
+		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 		assertEquals("HashMap generated ok", 3, companyManagementSystem.getMapOfAllEmploies().size());
 	}
 
-	@Test // also print the list of all employees and the list of employees with
-			// parking spaces
-	public void listOfEmployeesWithoutParkingSpacesHasCorectSize()
-			throws RoleNotDefinedException, WrongSeniorityException {
+	@After
+	public void listOfEmployeesWithoutParkingSpacesHasCorectSize() {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
-		companyManagementSystem.addListOfEmployess(listOfAllEmployess);
-		System.out.println("---List of ALL employees:");
-		for (Employee employee : listOfAllEmployess) {
-			System.out.println(employee.toString());
-		}
+		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
+
 		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
-		System.out.println("\n---Sorted list of employees without parking spaces:");
-		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
-			System.out.println(employee.toString());
-		}
+
 		assertEquals("List of employess without parking has corect size", 3,
 				listOfEmployeesWithoutParkingSpaces.size());
 	}
 
-	@Test
-	public void listOfEmployeesWithoutParkingSpacesIsSorted() throws RoleNotDefinedException {
-		// given
+	/*@Test
+	public void printAllEmployeesAndEmployeesWithParkingSpaces() {
 		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
 		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
-		// when
+		companyManagementSystem.addListOfEmployees(listOfAllEmployess);
+
+		System.out.println("---List of ALL employees:");
+		for (Employee employee : listOfAllEmployess) {
+			System.out.println(employee.toString());
+		}
+
 		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
+
+		System.out.println("\n---Sorted list of employees without parking spaces:");
+		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
+			System.out.println(employee.toString());
+		}
+	} */
+
+	@Test
+	public void listOfEmployeesWithoutParkingSpacesIsSorted() {
+		// given
 		int lastEmploySeniority = -1;
 		boolean listIsNotSorted = false;
+		CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
+		Set<Employee> listOfEmployeesWithoutParkingSpaces = new TreeSet<>();
+
+		// when
+		listOfEmployeesWithoutParkingSpaces = companyManagementSystem.generateListOfEmployeesWithoutParkingSpace();
 		for (Employee employee : listOfEmployeesWithoutParkingSpaces) {
 			// System.out.println(employee.getSeniority() + " "
 			// +lastEmploySeniority);
@@ -89,13 +102,13 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfManagersIsCorectGenerated() throws RoleNotDefinedException, WrongSeniorityException {
+	public void listOfManagersIsCorectGenerated() {
 		{
 			// given
 			Collection<Employee> listOfManagers = new ArrayList<>();
 			// when
 			CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
-			companyManagementSystem.addListOfEmployess(listOfAllEmployess);
+			companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 			listOfManagers = companyManagementSystem.getListOfManagers();
 			// then
 			assertEquals("Managers list size = ok", 1, listOfManagers.size());
@@ -103,13 +116,13 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfJuniorEngineersIsCorectGenerated() throws RoleNotDefinedException, WrongSeniorityException {
+	public void listOfJuniorEngineersIsCorectGenerated() {
 		{
 			// given
 			Collection<Employee> listOfJuniorEngineers = new ArrayList<>();
 			// when
 			CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
-			companyManagementSystem.addListOfEmployess(listOfAllEmployess);
+			companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 			listOfJuniorEngineers = companyManagementSystem.getListOfJuniorEngineers();
 			// then
 			assertEquals("Junior engineers list size = ok", 2, listOfJuniorEngineers.size());
@@ -117,17 +130,16 @@ public class CompanyManagementSystemTest {
 	}
 
 	@Test
-	public void listOfSeniorEngineersIsCorectGenerated() throws RoleNotDefinedException, WrongSeniorityException {
+	public void listOfSeniorEngineersIsCorectGenerated() {
 		{
 			// given
 			Collection<Employee> listOfSeniorEngineers = new ArrayList<>();
 			// when
 			CompanyManagementSystem companyManagementSystem = new CompanyManagementSystem();
-			companyManagementSystem.addListOfEmployess(listOfAllEmployess);
+			companyManagementSystem.addListOfEmployees(listOfAllEmployess);
 			listOfSeniorEngineers = companyManagementSystem.getListOfSeniorEngineers();
 			// then
 			assertEquals("Senior engineers list size = ok", 3, listOfSeniorEngineers.size());
 		}
 	}
-
 }
